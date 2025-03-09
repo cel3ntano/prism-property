@@ -8,6 +8,7 @@ export default function ContinueWithGoogleButton() {
 
   return (
     <Button
+      className="w-full"
       onClick={() => {
         auth?.loginWithGoogle();
       }}
