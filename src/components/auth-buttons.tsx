@@ -11,7 +11,7 @@ export default function AuthButtons() {
       {!!auth?.currentUser && (
         <>
           <div>{auth.currentUser.email}</div>
-          <div>Logout</div>
+          <div onClick={() => auth.logout()}>Logout</div>
         </>
       )}
       {!auth?.currentUser && (
