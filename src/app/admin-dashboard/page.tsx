@@ -2,6 +2,7 @@ import { Breadcrumbs } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
 import Link from 'next/link';
+import PropertiesTable from './properties-table';
 
 export default function AdminDashboard() {
   return (
@@ -19,6 +20,7 @@ export default function AdminDashboard() {
           <PlusCircle /> New property
         </Link>
       </Button>
+      <PropertiesTable />
     </div>
   );
 }

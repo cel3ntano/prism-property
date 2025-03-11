@@ -1,20 +1,14 @@
 'use server';
 
 import { auth, firestore } from '@/firebase/server';
+import { Property } from '@/types/property';
 import { propertyDataSchema } from '@/validation/propertySchema';
 
-export const saveNewProperty = async (data: {
-  address1: string;
-  address2?: string;
-  city: string;
-  postcode: string;
-  description: string;
-  price: number;
-  bedrooms: number;
-  bathrooms: number;
-  status: 'draft' | 'for-sale' | 'widthdrawn' | 'sold';
+type SavePropertyInput = Omit<Property, 'id'> & {
   token: string;
-}) => {
+};
+
+export const saveNewProperty = async (data: SavePropertyInput) => {
   const { token, ...propertyData } = data;
   const verifiedToken = await auth.verifyIdToken(token);
 
