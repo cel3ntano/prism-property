@@ -7,7 +7,7 @@ import {
   User,
 } from 'firebase/auth';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../firebase/client';
+import { auth } from '@/firebase/client';
 import { removeToken, setToken } from './actions';
 
 type AuthContextType = {
