@@ -4,12 +4,8 @@ import { auth, firestore } from '@/firebase/server';
 import { Property } from '@/types/property';
 import { propertyDataSchema } from '@/validation/propertySchema';
 
-type SavePropertyInput = Omit<Property, 'id'>;
-
-export const createProperty = async (
-  propertyData: SavePropertyInput,
-  authToken: string
-) => {
+export const updateProperty = async (data: Property, authToken: string) => {
+  const { id, ...propertyData } = data;
   const verifiedToken = await auth.verifyIdToken(authToken);
 
   if (!verifiedToken.admin) {
@@ -27,13 +23,8 @@ export const createProperty = async (
     };
   }
 
-  const property = await firestore.collection('properties').add({
-    ...propertyData,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  });
-
-  return {
-    propertyId: property.id,
-  };
+  await firestore
+    .collection('properties')
+    .doc(id)
+    .update({ ...propertyData, updatedAt: new Date() });
 };

@@ -12,10 +12,11 @@ import {
 } from './ui/dropdown-menu';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function AuthButtons() {
+  const router = useRouter();
   const auth = useAuth();
-
   const authLinkStyles = 'uppercase tracking-widest hover:underline';
 
   return (
@@ -61,6 +62,7 @@ export default function AuthButtons() {
             <DropdownMenuItem
               onClick={async () => {
                 await auth.logout();
+                router.refresh();
               }}
             >
               Logout

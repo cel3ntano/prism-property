@@ -17,7 +17,7 @@ export default function NewProperty() {
           <CardTitle className="text-3xl font-bold">New Property</CardTitle>
         </CardHeader>
         <CardContent>
-          <NewPropertyForm></NewPropertyForm>
+          <NewPropertyForm />
         </CardContent>
       </Card>
     </div>

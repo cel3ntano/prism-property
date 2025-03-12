@@ -9,13 +9,13 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { getProperties } from '@/data/properties';
+import { PencilIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function PropertiesTable({ page = 1 }: { page?: number }) {
   const { data, totalPages } = await getProperties({
     pagination: { page, pageSize: 2 },
   });
-  // console.log({ data, totalPages });
 
   return (
     <>
@@ -50,7 +50,14 @@ export default async function PropertiesTable({ page = 1 }: { page?: number }) {
                   <TableCell>{address}</TableCell>
                   <TableCell>{property.price}</TableCell>
                   <TableCell>{property.status}</TableCell>
-                  <TableCell>View/edit</TableCell>
+                  <TableCell>
+                    View /{' '}
+                    <Button asChild variant="outline" size="sm">
+                      <Link href={`admin-dashboard/edit/${property.id}`}>
+                        <PencilIcon />
+                      </Link>
+                    </Button>
+                  </TableCell>
                 </TableRow>
               );
             })}
