@@ -1,4 +1,4 @@
-import { firestore } from '@/firebase/server';
+import { firestore, getTotalPages } from '@/firebase/server';
 import { Property } from '@/types/property';
 import { PropertyStatus } from '@/types/propertyStatus';
 import 'server-only';
@@ -29,17 +29,19 @@ export const getProperties = async (options?: GetPropertiesOptions) => {
     propertiesQuery = propertiesQuery.where('price', '>=', minPrice);
   }
 
-  if (maxPrice !== null && minPrice !== undefined) {
+  if (maxPrice !== null && maxPrice !== undefined) {
     propertiesQuery = propertiesQuery.where('price', '<=', maxPrice);
   }
 
-  if (minBedrooms !== null && minPrice !== undefined) {
+  if (minBedrooms !== null && minBedrooms !== undefined) {
     propertiesQuery = propertiesQuery.where('bedrooms', '>=', minBedrooms);
   }
 
   if (status) {
     propertiesQuery = propertiesQuery.where('status', 'in', status);
   }
+
+  const totalPages = await getTotalPages(propertiesQuery, pageSize);
 
   const propertiesSnapshot = await propertiesQuery
     .limit(pageSize)
@@ -54,5 +56,5 @@ export const getProperties = async (options?: GetPropertiesOptions) => {
       } as Property)
   );
 
-  return { data: properties };
+  return { data: properties, totalPages };
 };

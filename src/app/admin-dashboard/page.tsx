@@ -4,7 +4,17 @@ import { PlusCircle } from 'lucide-react';
 import Link from 'next/link';
 import PropertiesTable from './properties-table';
 
-export default function AdminDashboard() {
+export default async function AdminDashboard({
+  searchParams,
+}: {
+  searchParams?: Promise<{
+    page?: string;
+    [key: string]: string | string[] | undefined;
+  }>;
+}) {
+  const searchParamsValue = await searchParams;
+  console.log({ searchParamsValue });
+
   return (
     <div>
       <Breadcrumbs
@@ -20,7 +30,9 @@ export default function AdminDashboard() {
           <PlusCircle /> New property
         </Link>
       </Button>
-      <PropertiesTable />
+      <PropertiesTable
+        page={searchParamsValue?.page ? parseInt(searchParamsValue.page) : 1}
+      />
     </div>
   );
 }
