@@ -51,7 +51,7 @@ export default async function PropertiesTable({ page = 1 }: { page?: number }) {
                 <TableRow key={property.id}>
                   <TableCell>{address}</TableCell>
                   <TableCell>
-                    ${numeral(property.price).format('0,0')}
+                    €{numeral(property.price).format('0,0')}
                   </TableCell>
                   <TableCell>
                     {' '}
