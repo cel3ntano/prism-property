@@ -19,5 +19,5 @@ export const propertyDataSchema = z.object({
   bathrooms: z.coerce
     .number()
     .nonnegative('Bathrooms cannot be negative. Please enter 0 or more.'),
-  status: z.enum(['draft', 'for-sale', 'widthdrawn', 'sold']),
+  status: z.enum(['draft', 'for-sale', 'withdrawn', 'sold']),
 });
