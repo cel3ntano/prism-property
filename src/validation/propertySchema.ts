@@ -21,3 +21,15 @@ export const propertyDataSchema = z.object({
     .nonnegative('Bathrooms cannot be negative. Please enter 0 or more.'),
   status: z.enum(['draft', 'for-sale', 'withdrawn', 'sold']),
 });
+
+export const propertyImagesSchema = z.object({
+  images: z.array(
+    z.object({
+      id: z.string(),
+      url: z.string(),
+      file: z.instanceof(File).optional(),
+    })
+  ),
+});
+
+export const propertySchema = propertyDataSchema.and(propertyImagesSchema);
