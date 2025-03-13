@@ -13,7 +13,6 @@ export default async function AdminDashboard({
   }>;
 }) {
   const searchParamsValue = await searchParams;
-  console.log({ searchParamsValue });
 
   return (
     <div>

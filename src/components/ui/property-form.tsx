@@ -212,6 +212,14 @@ export default function PropertyForm({
                     form.setValue('images', images);
                   }}
                   images={field.value}
+                  urlFormatter={(image) => {
+                    if (!image.file) {
+                      return `${
+                        process.env.NEXT_PUBLIC_FIREBASESTORAGE_URL
+                      }/${encodeURIComponent(image.url)}?alt=media`;
+                    }
+                    return image.url;
+                  }}
                 />
               </FormControl>
               <FormMessage></FormMessage>
