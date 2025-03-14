@@ -14,16 +14,16 @@ export async function middleware(request: NextRequest) {
 
   if (
     !token &&
-    (request.nextUrl.pathname.startsWith('/login') ||
-      request.nextUrl.pathname.startsWith('/register'))
+    (pathname.startsWith('/login') ||
+      pathname.startsWith('/register') ||
+      pathname.startsWith('/property-search'))
   ) {
     return NextResponse.next();
   }
 
   if (
     token &&
-    (request.nextUrl.pathname.startsWith('/login') ||
-      request.nextUrl.pathname.startsWith('/register'))
+    (pathname.startsWith('/login') || pathname.startsWith('/register'))
   ) {
     return NextResponse.redirect(new URL('/', request.url));
   }
@@ -43,9 +43,14 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  if (!decodedToken.admin) {
+  if (!decodedToken.admin && pathname.startsWith('/admin-dashboard')) {
     return NextResponse.redirect(new URL('/', request.url));
   }
+
+  if (decodedToken.admin && pathname.startsWith('/account/my-favourites')) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
   return NextResponse.next();
 }
 
@@ -55,5 +60,8 @@ export const config = {
     '/admin-dashboard/:path*',
     '/login',
     '/register',
+    '/account',
+    '/account/:path*',
+    '/property-search',
   ],
 };
