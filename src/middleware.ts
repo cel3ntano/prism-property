@@ -16,14 +16,17 @@ export async function middleware(request: NextRequest) {
     !token &&
     (pathname.startsWith('/login') ||
       pathname.startsWith('/register') ||
-      pathname.startsWith('/property-search'))
+      pathname.startsWith('/property-search') ||
+      pathname.startsWith('/forgot-password'))
   ) {
     return NextResponse.next();
   }
 
   if (
     token &&
-    (pathname.startsWith('/login') || pathname.startsWith('/register'))
+    (pathname.startsWith('/login') ||
+      pathname.startsWith('/register') ||
+      pathname.startsWith('/forgot-pasword'))
   ) {
     return NextResponse.redirect(new URL('/', request.url));
   }
@@ -60,6 +63,7 @@ export const config = {
     '/admin-dashboard/:path*',
     '/login',
     '/register',
+    '/forgot-password',
     '/account',
     '/account/:path*',
     '/property-search',
