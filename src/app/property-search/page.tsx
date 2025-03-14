@@ -12,14 +12,16 @@ import imageUrlFormatter from '@/lib/imageUrlFormatter';
 export default async function PropertySearch({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const searchParamsValues = await searchParams;
 
-  const parsedPage = parseInt(searchParamsValues?.page);
-  const parsedMinPrice = parseInt(searchParamsValues?.minPrice);
-  const parsedMaxPrice = parseInt(searchParamsValues?.maxPrice);
-  const parsedMinBedrooms = parseInt(searchParamsValues?.minBedrooms);
+  const parsedPage = parseInt(String(searchParamsValues?.page || ''));
+  const parsedMinPrice = parseInt(String(searchParamsValues?.minPrice || ''));
+  const parsedMaxPrice = parseInt(String(searchParamsValues?.maxPrice || ''));
+  const parsedMinBedrooms = parseInt(
+    String(searchParamsValues?.minBedrooms || '')
+  );
 
   const page = isNaN(parsedPage) ? 1 : parsedPage;
   const minPrice = isNaN(parsedMinPrice) ? null : parsedMinPrice;
@@ -106,15 +108,24 @@ export default async function PropertySearch({
           const newSearchParams = new URLSearchParams();
 
           if (searchParamsValues?.minPrice) {
-            newSearchParams.set('minPrice', searchParamsValues.minPrice);
+            newSearchParams.set(
+              'minPrice',
+              searchParamsValues.minPrice.toString()
+            );
           }
 
           if (searchParamsValues?.maxPrice) {
-            newSearchParams.set('maxPrice', searchParamsValues.maxPrice);
+            newSearchParams.set(
+              'maxPrice',
+              searchParamsValues.maxPrice.toString()
+            );
           }
 
           if (searchParamsValues?.minBedrooms) {
-            newSearchParams.set('minBedrooms', searchParamsValues.minBedrooms);
+            newSearchParams.set(
+              'minBedrooms',
+              searchParamsValues.minBedrooms.toString()
+            );
           }
 
           newSearchParams.set('page', `${i + 1}`);
