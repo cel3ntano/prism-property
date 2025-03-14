@@ -13,6 +13,7 @@ import { getUserFavourites } from '@/data/favourites';
 import { cookies } from 'next/headers';
 import { DecodedIdToken } from 'firebase-admin/auth';
 import { auth } from '@/firebase/server';
+import { PAGE_SIZE } from '@/lib/constants/pageSize';
 
 export default async function PropertySearch({
   searchParams,
@@ -36,7 +37,7 @@ export default async function PropertySearch({
   const { data, totalPages } = await getProperties({
     pagination: {
       page,
-      pageSize: 3,
+      pageSize: PAGE_SIZE,
     },
     filters: {
       minPrice,

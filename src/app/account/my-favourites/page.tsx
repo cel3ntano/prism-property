@@ -15,6 +15,7 @@ import { EyeIcon } from 'lucide-react';
 import Link from 'next/link';
 import RemoveFavouriteButton from './remove-favourite-button';
 import { redirect } from 'next/navigation';
+import { PAGE_SIZE } from '@/lib/constants/pageSize';
 
 export default async function MyFavourites({
   searchParams,
@@ -26,7 +27,7 @@ export default async function MyFavourites({
 }) {
   const searchParamsValues = await searchParams;
   const page = searchParamsValues?.page ? parseInt(searchParamsValues.page) : 1;
-  const pageSize = 2;
+  const pageSize = PAGE_SIZE;
   const favourites = await getUserFavourites();
   const allFavourites = Object.keys(favourites);
   const totalPages = Math.ceil(allFavourites.length / pageSize);

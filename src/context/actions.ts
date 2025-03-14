@@ -27,8 +27,12 @@ export const setToken = async ({
       return;
     }
     const userRecord = await auth.getUser(verifiedToken.uid);
+    const adminEmails = process.env.ADMIN_EMAIL
+      ? process.env.ADMIN_EMAIL.split(',').map((email) => email.trim())
+      : [];
     if (
-      process.env.ADMIN_EMAIL === userRecord.email &&
+      userRecord.email &&
+      adminEmails.includes(userRecord.email) &&
       !userRecord.customClaims?.admin
     ) {
       auth.setCustomUserClaims(verifiedToken.uid, { admin: true });

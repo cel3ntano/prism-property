@@ -13,10 +13,11 @@ import { getProperties } from '@/data/properties';
 import { EyeIcon, PencilIcon } from 'lucide-react';
 import Link from 'next/link';
 import numeral from 'numeral';
+import { PAGE_SIZE } from '@/lib/constants/pageSize';
 
 export default async function PropertiesTable({ page = 1 }: { page?: number }) {
   const { data, totalPages } = await getProperties({
-    pagination: { page, pageSize: 2 },
+    pagination: { page, pageSize: PAGE_SIZE },
   });
 
   return (

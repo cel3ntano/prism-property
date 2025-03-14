@@ -13,6 +13,9 @@ import numeral from 'numeral';
 import ReactMarkdown from 'react-markdown';
 import BackButton from './back-button';
 import imageUrlFormatter from '@/lib/imageUrlFormatter';
+
+export const dynamic = 'force-static';
+
 export default async function Property({
   params,
 }: {

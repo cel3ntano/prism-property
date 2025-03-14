@@ -28,21 +28,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         <AuthProvider>
-          <nav className="bg-sky-950 text-white p-5 h-24 flex items-center justify-between">
+          <nav className="bg-sky-950 text-white p-5 h-24 flex items-center justify-between relative z-10">
             <Link
               href="/"
-              className="uppercase text-2xl tracking-widest flex items-center gap-2 "
+              className="text-3xl tracking-widest flex gap-2 items-center"
             >
               <HomeIcon />
-              <span>PrismProperty</span>
+              <span className="hidden sm:block">PRISM PROPERTY</span>
             </Link>
-            <ul className="flex gap-6 items-center">
+            <ul className="flex gap-6 items-center uppercase tracking-widest [&_a:hover]:underline">
               <li>
-                <Link
-                  href="/property-search"
-                  className="uppercase tracking-widest hover:underline"
-                >
-                  Property search
+                <Link href="/property-search">
+                  <span className="hidden sm:inline">Property</span> Search
                 </Link>
               </li>
               <li>
