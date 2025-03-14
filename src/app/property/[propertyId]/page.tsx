@@ -5,7 +5,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import PropertyStatusBadge from '@/components/ui/property-status-badge';
+import PropertyStatusBadge from '@/components/property-status-badge';
 import { getPropertyById } from '@/data/properties';
 import { BathIcon, BedIcon } from 'lucide-react';
 import Image from 'next/image';

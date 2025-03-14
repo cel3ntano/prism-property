@@ -1,5 +1,5 @@
 import { PropertyStatus } from '@/types/propertyStatus';
-import { Badge } from './badge';
+import { Badge } from './ui/badge';
 
 const statusLabel = {
   'for-sale': 'For Sale',

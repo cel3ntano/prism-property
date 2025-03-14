@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import PropertyStatusBadge from '@/components/ui/property-status-badge';
+import PropertyStatusBadge from '@/components/property-status-badge';
 import {
   Table,
   TableBody,
