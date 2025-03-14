@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import {
   Carousel,
   CarouselContent,
@@ -8,11 +7,12 @@ import {
 } from '@/components/ui/carousel';
 import PropertyStatusBadge from '@/components/ui/property-status-badge';
 import { getPropertyById } from '@/data/properties';
-import { ArrowLeft, BathIcon, BedIcon } from 'lucide-react';
+import { BathIcon, BedIcon } from 'lucide-react';
 import Image from 'next/image';
 import numeral from 'numeral';
 import ReactMarkdown from 'react-markdown';
 import BackButton from './back-button';
+import imageUrlFormatter from '@/lib/imageUrlFormatter';
 export default async function Property({
   params,
 }: {
@@ -40,9 +40,7 @@ export default async function Property({
                 <CarouselItem key={image}>
                   <div className="relative h-[80vh] min-h-80">
                     <Image
-                      src={`${
-                        process.env.NEXT_PUBLIC_FIREBASESTORAGE_URL
-                      }/${encodeURIComponent(image)}?alt=media`}
+                      src={imageUrlFormatter(image)}
                       alt={`Property image ${index + 1}`}
                       fill
                       className="object-cover"
